@@ -1,6 +1,6 @@
 package org.rsmod.plugins.api.move
 
-import org.openrs2.crypto.XteaKey
+import org.openrs2.crypto.SymmetricKey
 import org.rsmod.game.map.square.MapSquareKey
 import org.rsmod.game.map.zone.ZoneKey
 import org.rsmod.game.model.mob.Player
@@ -54,7 +54,7 @@ public class PostMovementProcess @Inject constructor(
         val xtea = buildList {
             val mapSquares = zoneKey.toViewport(BuildAreaUtils.ZONE_VIEW_RADIUS)
             mapSquares.forEach { mapSquare ->
-                val key = xteaRepository[mapSquare] ?: XteaKey.ZERO
+                val key = xteaRepository[mapSquare] ?: SymmetricKey.ZERO
                 this += key.k0
                 this += key.k1
                 this += key.k2
